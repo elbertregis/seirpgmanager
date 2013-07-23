@@ -26,22 +26,13 @@ namespace SeiRPGManager.DAL.Repositorio
         /// 
         /// </summary>
         internal SeiRPGManagerContexto _contexto;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="context"></param>
-        public SeiRPGManagerDAO(SeiRPGManagerContexto context)
-        {
-            this._contexto = context;            
-        }
 
         /// <summary>
         /// 
         /// </summary>
         public SeiRPGManagerDAO()
         {
-            this._contexto = new SeiRPGManagerContexto();            
+            this._contexto = new SeiRPGManagerContexto();
         }
 
         /// <summary>
@@ -50,9 +41,23 @@ namespace SeiRPGManager.DAL.Repositorio
         /// <returns>TODO: Update Header</returns>
         public List<T> ObterTodos<T>() where T : Entidade
         {
-            using (var contexto = _contexto)
+            try
             {
-                return contexto.Set<T>().ToList<T>(); 
+                using (var contexto = new SeiRPGManagerContexto())
+                {
+                    if (contexto.Set<T>().Any() == false)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return contexto.Set<T>().Select(x => x).ToList<T>();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
 
@@ -65,7 +70,7 @@ namespace SeiRPGManager.DAL.Repositorio
         {
             try
             {
-                bool retorno = false;                
+                bool retorno = false;
 
                 if (_contexto.SaveChanges() == 1)
                 {
@@ -94,10 +99,10 @@ namespace SeiRPGManager.DAL.Repositorio
         /// <param name="entidade"></param>
         public void Atualizar<T>(T entidade) where T : Entidade
         {
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
                 contexto.Set<T>().Attach(entidade);
-                _contexto.Entry(entidade).State = EntityState.Modified; 
+                _contexto.Entry(entidade).State = EntityState.Modified;
             }
         }
 
@@ -110,7 +115,7 @@ namespace SeiRPGManager.DAL.Repositorio
             if (ids == null || ids.Count() == 0)
                 throw new ArgumentException("Impossível excluir uma entidade nula");
 
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
                 T entityToDelete = contexto.Set<T>().Where(ent => ent.Id == 1).Single();
                 T entidade;
@@ -118,7 +123,7 @@ namespace SeiRPGManager.DAL.Repositorio
                 foreach (long id in ids)
                 {
                     entidade = ObterUm<T>(ent => ent.Id == id);
-                    Excluir<T>(entidade);                                
+                    Excluir<T>(entidade);
                 }
             }
         }
@@ -131,9 +136,9 @@ namespace SeiRPGManager.DAL.Repositorio
         /// <returns></returns>
         public IEnumerable<T> Pesquisar<T>(Func<T, bool> filtro) where T : Entidade
         {
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
-                return contexto.Set<T>().Where(filtro); 
+                return contexto.Set<T>().Where(filtro);
             }
         }
 
@@ -145,9 +150,9 @@ namespace SeiRPGManager.DAL.Repositorio
         /// <returns></returns>
         public T ObterUm<T>(Func<T, bool> filtro) where T : Entidade
         {
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
-                return contexto.Set<T>().Single(filtro); 
+                return contexto.Set<T>().Single(filtro);
             }
         }
 
@@ -159,9 +164,9 @@ namespace SeiRPGManager.DAL.Repositorio
         /// <returns></returns>
         public T ObterPrimeiro<T>(Func<T, bool> filtro) where T : Entidade
         {
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
-                return contexto.Set<T>().First(filtro); 
+                return contexto.Set<T>().First(filtro);
             }
         }
 
@@ -172,10 +177,10 @@ namespace SeiRPGManager.DAL.Repositorio
         /// <returns></returns>
         public IEnumerable<T> Pesquisar<T>() where T : Entidade
         {
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
-                return contexto.Set<T>().ToList();    
-            }            
+                return contexto.Set<T>().ToList();
+            }
         }
 
         /// <summary>
@@ -188,9 +193,9 @@ namespace SeiRPGManager.DAL.Repositorio
             if (entidade == null)
                 throw new ArgumentException("Impossível inserir uma entidade Nula");
 
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
-                contexto.Set<T>().Add(entidade); 
+                contexto.Set<T>().Add(entidade);
             }
         }
 
@@ -204,13 +209,13 @@ namespace SeiRPGManager.DAL.Repositorio
             if (entidade == null)
                 throw new ArgumentException("Impossível excluir uma entidade nula");
 
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
                 if (contexto.Entry(entidade).State == EntityState.Detached)
                 {
                     contexto.Set<T>().Attach(entidade);
                 }
-                contexto.Set<T>().Remove(entidade); 
+                contexto.Set<T>().Remove(entidade);
             }
         }
 
@@ -224,9 +229,9 @@ namespace SeiRPGManager.DAL.Repositorio
             if (entidade == null)
                 throw new ArgumentException("Impossível anexar a uma entidade nula");
 
-            using (var contexto = _contexto)
+            using (var contexto = new SeiRPGManagerContexto())
             {
-                contexto.Set<T>().Attach(entidade); 
+                contexto.Set<T>().Attach(entidade);
             }
         }
 

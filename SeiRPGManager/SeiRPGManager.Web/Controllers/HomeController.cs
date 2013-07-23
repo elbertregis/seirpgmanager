@@ -38,9 +38,7 @@ namespace SeiRPGManager.Web.Controllers
             
             rDao.Inserir(r);
             IList<Raca> listaRaca = rDao.ObterTodos<Raca>();
-
-            
-
+           
             return View();
         }
 
