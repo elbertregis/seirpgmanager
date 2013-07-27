@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebMatrix.WebData;
 
 namespace SeiRPGManager.Web
 {
@@ -19,8 +20,8 @@ namespace SeiRPGManager.Web
         protected void Application_Start()
         {
             //Database.SetInitializer<SeiRPGManagerContexto>(new SeiRPGManagerInicializador());
-            Database.SetInitializer<SeiRPGManagerContexto>(new DropCreateDatabaseIfModelChanges<SeiRPGManagerContexto>());
-
+            Database.SetInitializer<SeiRPGManagerContexto>(new DropCreateDatabaseIfModelChanges<SeiRPGManagerContexto>());          
+            
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

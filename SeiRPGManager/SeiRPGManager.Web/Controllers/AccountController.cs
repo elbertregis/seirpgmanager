@@ -8,12 +8,13 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
+using SeiRPGManager.Web.Filters;
 using SeiRPGManager.Web.Models;
 
-namespace OAuthWithMvc4.Controllers
+namespace SeiRPGManager.Web.Controllers
 {
     [Authorize]
-    [SeiRPGManager.Web.Filters.InitializeSimpleMembership]
+    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
