@@ -38,7 +38,7 @@ namespace SeiRPGManager.Web.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "Users", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {

@@ -50,6 +50,7 @@
     <Compile Include="Modelo\ClassesBasicas\Entidade.cs" />
     <Compile Include="Modelo\ClassesBasicas\Equipamento.cs" />
     <Compile Include="Modelo\ClassesBasicas\Especializacao.cs" />
+    <Compile Include="Modelo\ClassesBasicas\ExternalUser.cs" />
     <Compile Include="Modelo\ClassesBasicas\Habilitador.cs" />
     <Compile Include="Modelo\ClassesBasicas\Jogador.cs" />
     <Compile Include="Modelo\ClassesBasicas\Mensagem.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Modelo\ClassesBasicas\Parametro.cs" />
     <Compile Include="Modelo\ClassesBasicas\Personagem.cs" />
     <Compile Include="Modelo\ClassesBasicas\Personalidade.cs" />
+    <Compile Include="Modelo\ClassesBasicas\User.cs" />
     <Compile Include="Modelo\ClassesBasicas\Validacao.cs" />
     <Compile Include="Modelo\ClassesPlanilha\ClassesPlanilha.cs" />
     <Compile Include="Modelo\ClassesPlanilha\Planilha.cs" />

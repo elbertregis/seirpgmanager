@@ -61,6 +61,7 @@
     <Compile Include="Repositorio\Exceptions\SeiRPGManagerException.cs" />
     <Compile Include="Repositorio\Exceptions\ViolacaoChaveUnicaException.cs" />
     <Compile Include="Repositorio\Exceptions\ViolacaoReferenciaException.cs" />
+    <Compile Include="Repositorio\ExternalUserDAO.cs" />
     <Compile Include="Repositorio\HabilitadorDAO.cs" />
     <Compile Include="Repositorio\Interface\IAgendaDAO.cs" />
     <Compile Include="Repositorio\Interface\IAnotacaoDAO.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Repositorio\Interface\IEnredoPoolDAO.cs" />
     <Compile Include="Repositorio\Interface\IEquipamentoDAO.cs" />
     <Compile Include="Repositorio\Interface\IEspecializacaoDAO.cs" />
+    <Compile Include="Repositorio\Interface\IExternalUserDAO.cs" />
     <Compile Include="Repositorio\Interface\IHabilitadorDAO.cs" />
     <Compile Include="Repositorio\Interface\IJogadorDAO.cs" />
     <Compile Include="Repositorio\Interface\IMensagemDAO.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Repositorio\Interface\ISeiRPGManagerDAO.cs" />
     <Compile Include="Repositorio\Interface\ISistemaDAO.cs" />
     <Compile Include="Repositorio\Interface\ITalentoDAO.cs" />
+    <Compile Include="Repositorio\Interface\IUserDAO.cs" />
     <Compile Include="Repositorio\JogadorDAO.cs" />
     <Compile Include="Repositorio\MensagemDAO.cs" />
     <Compile Include="Repositorio\NomePoolDAO.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Repositorio\SeiRPGManagerInicializador.cs" />
     <Compile Include="Repositorio\SistemaDAO.cs" />
     <Compile Include="Repositorio\TalentoDAO.cs" />
+    <Compile Include="Repositorio\UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeiRPGManager.Entidades\SeiRPGManager.Entidades.csproj">
