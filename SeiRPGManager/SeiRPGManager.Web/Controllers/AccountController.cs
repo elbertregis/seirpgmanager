@@ -8,13 +8,12 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using SeiRPGManager.Web.Filters;
 using SeiRPGManager.Web.Models;
 
-namespace SeiRPGManager.Web.Controllers
+namespace OAuthWithMvc4.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
+    [SeiRPGManager.Web.Filters.InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -35,10 +34,10 @@ namespace SeiRPGManager.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            //if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
-            //{
-            //    return RedirectToLocal(returnUrl);
-            //}
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            {
+                return RedirectToLocal(returnUrl);
+            }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
@@ -208,7 +207,9 @@ namespace SeiRPGManager.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            String returnURI = Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl });
+
+            return new ExternalLoginResult(provider, returnURI);
         }
 
         //

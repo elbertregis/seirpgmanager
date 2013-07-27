@@ -1,6 +1,8 @@
-﻿@{
+﻿@model SeiRPGManager.Web.Models.LoginModel
+@{
     Layout = null;
 }
+
 <!DOCTYPE html>
 
 <!--[if IEMobile 7]><html class="no-js iem7 oldie linen"><![endif]-->
@@ -88,13 +90,60 @@
 
 <body>
 
+<section id="loginForm">
+<h2>Use a local account to log in.</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Register", "Register") if you don't have an account.
+    </p>
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+
+
+
+
     <div id="container">
 
         <hgroup id="login-title" class="large-margin-bottom">
             <h1 class="login-title-image">SEIRPG Manager</h1>
             <h5>&copy; O SubMundo</h5>
         </hgroup>
-
+        <section class="social" id="socialLoginForm">
+            <h2>Use another service to log in.</h2>
+            @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
         <div id="form-wrapper">
 
             <div id="form-block" class="scratch-metal">
@@ -191,8 +240,7 @@
 		 * Or if you don't trust AJAX calls, just remove the event.preventDefault() part and let the form be submitted.
 		 */
 
-        $(document).ready(function()
-        {
+        $(document).ready(function () {
             /*
 			 * JS login effect
 			 * This script will enable effects for the login page
@@ -235,8 +283,7 @@
 			 * Login
 			 * These functions will handle the login process through AJAX
 			 */
-            $('#form-login').submit(function(event)
-            {
+            $('#form-login').submit(function (event) {
                 // Values
                 var login = $.trim($('#login').val()),
 					pass = $.trim($('#pass').val());
@@ -245,14 +292,12 @@
                 event.preventDefault();
 
                 // Check inputs
-                if (login.length === 0)
-                {
+                if (login.length === 0) {
                     // Display message
                     displayError('Preencha seu login');
                     return false;
                 }
-                else if (pass.length === 0)
-                {
+                else if (pass.length === 0) {
                     // Remove empty login message if displayed
                     formWrapper.clearMessages('Preencha seu login');
 
@@ -260,8 +305,7 @@
                     displayError('Preencha sua senha');
                     return false;
                 }
-                else
-                {
+                else {
                     // Remove previous messages
                     formWrapper.clearMessages();
 
@@ -296,7 +340,7 @@
 					 */
 
                     // Simulate server-side check
-                    setTimeout(function() {
+                    setTimeout(function () {
                         document.location.href = './'
                     }, 2000);
                 }
@@ -305,8 +349,7 @@
             /*
 			 * Password recovery
 			 */
-            $('#form-password').submit(function(event)
-            {
+            $('#form-password').submit(function (event) {
                 // Values
                 var mail = $.trim($('#mail').val());
                 var rex = new RegExp("([a-z]+)((\\d+)([a-z]+))?,?");
@@ -317,309 +360,277 @@
                 event.preventDefault();
 
                 // Check inputs
-                if (mail.length === 0)
-                {
+                if (mail.length === 0) {
                     // Display message
                     displayError('Preencha seu email');
                 }
                     // Want more robust mail validation? see http://stackoverflow.com/a/2855946
-                else if (!re.test(mail))
-					{
+                else if (!re.test(mail)) {
                     // Remove empty email message if displayed
-					formWrapper.clearMessages('Preencha seu email');
+                    formWrapper.clearMessages('Preencha seu email');
 
-                // Display message
-                displayError('Email inválido');
-                return false;
-            }
-            else
-        {
-            // Remove previous messages
-					formWrapper.clearMessages();
+                    // Display message
+                    displayError('Email inválido');
+                    return false;
+                }
+                else {
+                    // Remove previous messages
+                    formWrapper.clearMessages();
 
-            // Show progress
-            displayLoading('Enviando credenciais...');
+                    // Show progress
+                    displayLoading('Enviando credenciais...');
+
+                    /*
+                     * This is where you may do your AJAX call
+                     */
+
+                    // Simulate server-side check
+                    setTimeout(function () {
+                        document.location.href = './'
+                    }, 2000);
+                }
+            });
 
             /*
-             * This is where you may do your AJAX call
+             * Register
+             */
+            $('#form-register').submit(function (event) {
+                // Values
+                var name = $.trim($('#name-register').val()),
+                    mail = $.trim($('#mail-register').val()),
+                    login = $.trim($('#login-register').val()),
+                    pass = $.trim($('#pass-register').val());
+
+                var rex = new RegExp("([a-z]+)((\\d+)([a-z]+))?,?");
+
+
+                // Remove previous messages
+                formWrapper.clearMessages();
+
+                // Stop normal behavior
+                event.preventDefault();
+
+                // Check inputs
+                if (name.length === 0) {
+                    // Display message
+                    displayError('Preencha seu nome');
+                    return false;
+                }
+                else if (mail.length === 0) {
+                    // Display message
+                    displayError('Preencha seu email');
+                    return false;
+                }
+                else if (!rex.test(mail)) {
+                    // Display message
+                    displayError('Email inválido');
+                    return false;
+                }
+                else if (login.length === 0) {
+                    // Display message
+                    displayError('Preencha o Login');
+                    return false;
+                }
+                else if (pass.length === 0) {
+                    // Display message
+                    displayError('Preencha a Senha');
+                    return false;
+                }
+                else {
+                    // Show progress
+                    displayLoading('Registrando...');
+
+                    /*
+                     * This is where you may do your AJAX call
+                     */
+
+                    // Simulate server-side check
+                    setTimeout(function () {
+                        document.location.href = './'
+                    }, 2000);
+                }
+            });
+
+            /******* END OF EDIT SECTION *******/
+
+            /*
+             * Animated login
              */
 
-            // Simulate server-side check
-            setTimeout(function() {
-                document.location.href = './'
-            }, 2000);
-        }
-        });
+            // Prepare forms
+            forms.each(function (i) {
+                var form = $(this),
+                    height = form.outerHeight(),
+                    active = (hash === false && i === 0) || (hash === this.id),
+                    color = this.className.match(/[a-z]+-gradient/) ? ' ' + (/([a-z]+)-gradient/.exec(this.className)[1]) + '-active' : '';
 
-        /*
-         * Register
-         */
-        $('#form-register').submit(function(event)
-        {
-            // Values
-            var name = $.trim($('#name-register').val()),
-                mail = $.trim($('#mail-register').val()),
-                login = $.trim($('#login-register').val()),
-                pass = $.trim($('#pass-register').val());
+                // Store size
+                form.data('height', height);
 
-            var rex = new RegExp("([a-z]+)((\\d+)([a-z]+))?,?");
+                // Min-height for mobile layout
+                if (maxHeight === false || height > maxHeight) {
+                    maxHeight = height;
+                }
 
+                // Button in the switch
+                form.data('button', $('<a href="#' + this.id + '" class="button anthracite-gradient' + color + (active ? ' active' : '') + '">' + this.title + '</a>')
+                                    .appendTo(formSwitch)
+                                    .data('form', form));
 
-            // Remove previous messages
-            formWrapper.clearMessages();
+                // Remove title to prevent tooltip from showing - thanks efreed :)
+                this.title = '';
 
-            // Stop normal behavior
-            event.preventDefault();
-
-            // Check inputs
-            if (name.length === 0)
-            {
-                // Display message
-                displayError('Preencha seu nome');
-                return false;
-            }
-            else if (mail.length === 0)
-            {
-                // Display message
-                displayError('Preencha seu email');
-                return false;
-            }
-            else if (!rex.test(mail))
-	            {
-                // Display message
-					displayError('Email inválido');
-            return false;
-        }
-    else if (login.length === 0)
-    {
-        // Display message
-        displayError('Preencha o Login');
-        return false;
-    }
-    else if (pass.length === 0)
-    {
-        // Display message
-        displayError('Preencha a Senha');
-        return false;
-    }
-    else
-    {
-    // Show progress
-					displayLoading('Registrando...');
-
-    /*
-     * This is where you may do your AJAX call
-     */
-
-    // Simulate server-side check
-    setTimeout(function() {
-        document.location.href = './'
-    }, 2000);
-    }
-    });
-
-    /******* END OF EDIT SECTION *******/
-
-    /*
-     * Animated login
-     */
-
-    // Prepare forms
-    forms.each(function(i)
-    {
-        var form = $(this),
-            height = form.outerHeight(),
-            active = (hash === false && i === 0) || (hash === this.id),
-            color = this.className.match(/[a-z]+-gradient/) ? ' '+(/([a-z]+)-gradient/.exec(this.className)[1])+'-active' : '';
-
-        // Store size
-        form.data('height', height);
-
-        // Min-height for mobile layout
-        if (maxHeight === false || height > maxHeight)
-        {
-            maxHeight = height;
-        }
-
-        // Button in the switch
-        form.data('button', $('<a href="#'+this.id+'" class="button anthracite-gradient'+color+(active ? ' active' : '')+'">'+this.title+'</a>')
-                            .appendTo(formSwitch)
-                            .data('form', form));
-
-        // Remove title to prevent tooltip from showing - thanks efreed :)
-        this.title = '';
-
-        // If active
-        if (active)
-        {
-            // Store
-            currentForm = form;
-
-            // Height of viewport
-            formViewport.height(height);
-        }
-        else
-        {
-            // Hide for now
-            form.hide();
-        }
-    });
-
-    // Main bloc height (without form height)
-    blocHeight = formBlock.height()-currentForm.data('height');
-
-    // Handle resizing (mostly for debugging)
-    function handleLoginResize()
-    {
-        // Detect mode
-        centered = (container.css('position') === 'absolute');
-
-        // Set min-height for mobile layout
-        if (!centered)
-        {
-            formWrapper.css('min-height', (blocHeight+maxHeight+20)+'px');
-            container.css('margin-top', '');
-        }
-        else
-        {
-            formWrapper.css('min-height', '');
-            if (parseInt(container.css('margin-top'), 10) === 0)
-            {
-                centerForm(currentForm, false);
-            }
-        }
-    };
-
-    // Register and first call
-    $(window).bind('normalized-resize', handleLoginResize);
-    handleLoginResize();
-
-    // Switch behavior
-    formSwitch.on('click', 'a', function(event)
-    {
-        var link = $(this),
-            form = link.data('form'),
-            previousForm = currentForm;
-
-        event.preventDefault();
-        if (link.hasClass('active'))
-        {
-            return;
-        }
-
-        // Refresh forms sizes
-        forms.each(function(i)
-        {
-            var form = $(this),
-                hidden = form.is(':hidden'),
-                height = form.show().outerHeight();
-
-            // Store size
-            form.data('height', height);
-
-            // If not active
-            if (hidden)
-            {
-                // Hide for now
-                form.hide();
-            }
-        });
-
-        // Clear messages
-        formWrapper.clearMessages();
-
-        // If an animation is already running
-        if (animInt)
-        {
-            clearTimeout(animInt);
-        }
-        formViewport.stop(true);
-
-        // Update active button
-        currentForm.data('button').removeClass('active');
-        link.addClass('active');
-
-        // Set as current
-        currentForm = form;
-
-        // if CSS transitions are available
-        if (doc.hasClass('csstransitions'))
-        {
-            // Close doors - step 1
-            doors.removeClass('door-closed').addClass('door-down');
-            animInt = setTimeout(function()
-            {
-                // Close doors, step 2
-                doors.addClass('door-closed');
-                animInt = setTimeout(function()
-                {
-                    // Hide previous form
-                    previousForm.hide();
-
-                    // Show target form
-                    form.show();
-
-                    // Center layout
-                    centerForm(form, true);
+                // If active
+                if (active) {
+                    // Store
+                    currentForm = form;
 
                     // Height of viewport
-                    formViewport.animate({
-                        height: form.data('height')+'px'
-                    }, function()
-                    {
-                        // Open doors, step 1
-                        doors.removeClass('door-closed');
-                        animInt = setTimeout(function()
-                        {
-                            // Open doors - step 2
-                            doors.removeClass('door-down');
-                        }, 300);
-                    });
-                }, 300);
-            }, 300);
-        }
-        else
-        {
-            // Close doors
-            topDoor.animate({ top: '0%' }, 300);
-            botDoor.animate({ top: '50%' }, 300, function()
-            {
-                // Hide previous form
-                previousForm.hide();
+                    formViewport.height(height);
+                }
+                else {
+                    // Hide for now
+                    form.hide();
+                }
+            });
 
-                // Show target form
-                form.show();
+            // Main bloc height (without form height)
+            blocHeight = formBlock.height() - currentForm.data('height');
 
-                // Center layout
-                centerForm(form, true);
+            // Handle resizing (mostly for debugging)
+            function handleLoginResize() {
+                // Detect mode
+                centered = (container.css('position') === 'absolute');
 
-                // Height of viewport
-                formViewport.animate({
-                    height: form.data('height')+'px'
-                }, {
+                // Set min-height for mobile layout
+                if (!centered) {
+                    formWrapper.css('min-height', (blocHeight + maxHeight + 20) + 'px');
+                    container.css('margin-top', '');
+                }
+                else {
+                    formWrapper.css('min-height', '');
+                    if (parseInt(container.css('margin-top'), 10) === 0) {
+                        centerForm(currentForm, false);
+                    }
+                }
+            };
 
-                    /* IE7 is a bit buggy, we must force redraw */
-                    step: function(now, fx)
-                    {
-                        topDoor.hide().show();
-                        botDoor.hide().show();
-                        formSwitch.hide().show();
-                    },
+            // Register and first call
+            $(window).bind('normalized-resize', handleLoginResize);
+            handleLoginResize();
 
-                    complete: function()
-                    {
-                        // Open doors
-                        topDoor.animate({ top: '-50%' }, 300);
-                        botDoor.animate({ top: '105%' }, 300);
-                        formSwitch.hide().show();
+            // Switch behavior
+            formSwitch.on('click', 'a', function (event) {
+                var link = $(this),
+                    form = link.data('form'),
+                    previousForm = currentForm;
+
+                event.preventDefault();
+                if (link.hasClass('active')) {
+                    return;
+                }
+
+                // Refresh forms sizes
+                forms.each(function (i) {
+                    var form = $(this),
+                        hidden = form.is(':hidden'),
+                        height = form.show().outerHeight();
+
+                    // Store size
+                    form.data('height', height);
+
+                    // If not active
+                    if (hidden) {
+                        // Hide for now
+                        form.hide();
                     }
                 });
-            });
-        }
-    });
 
-    // Initial vertical adjust
-    centerForm(currentForm, false);
+                // Clear messages
+                formWrapper.clearMessages();
+
+                // If an animation is already running
+                if (animInt) {
+                    clearTimeout(animInt);
+                }
+                formViewport.stop(true);
+
+                // Update active button
+                currentForm.data('button').removeClass('active');
+                link.addClass('active');
+
+                // Set as current
+                currentForm = form;
+
+                // if CSS transitions are available
+                if (doc.hasClass('csstransitions')) {
+                    // Close doors - step 1
+                    doors.removeClass('door-closed').addClass('door-down');
+                    animInt = setTimeout(function () {
+                        // Close doors, step 2
+                        doors.addClass('door-closed');
+                        animInt = setTimeout(function () {
+                            // Hide previous form
+                            previousForm.hide();
+
+                            // Show target form
+                            form.show();
+
+                            // Center layout
+                            centerForm(form, true);
+
+                            // Height of viewport
+                            formViewport.animate({
+                                height: form.data('height') + 'px'
+                            }, function () {
+                                // Open doors, step 1
+                                doors.removeClass('door-closed');
+                                animInt = setTimeout(function () {
+                                    // Open doors - step 2
+                                    doors.removeClass('door-down');
+                                }, 300);
+                            });
+                        }, 300);
+                    }, 300);
+                }
+                else {
+                    // Close doors
+                    topDoor.animate({ top: '0%' }, 300);
+                    botDoor.animate({ top: '50%' }, 300, function () {
+                        // Hide previous form
+                        previousForm.hide();
+
+                        // Show target form
+                        form.show();
+
+                        // Center layout
+                        centerForm(form, true);
+
+                        // Height of viewport
+                        formViewport.animate({
+                            height: form.data('height') + 'px'
+                        }, {
+
+                            /* IE7 is a bit buggy, we must force redraw */
+                            step: function (now, fx) {
+                                topDoor.hide().show();
+                                botDoor.hide().show();
+                                formSwitch.hide().show();
+                            },
+
+                            complete: function () {
+                                // Open doors
+                                topDoor.animate({ top: '-50%' }, 300);
+                                botDoor.animate({ top: '105%' }, 300);
+                                formSwitch.hide().show();
+                            }
+                        });
+                    });
+                }
+            });
+
+            // Initial vertical adjust
+            centerForm(currentForm, false);
 
     @*/*
      * Center function
@@ -628,85 +639,77 @@
 			 * @param string|element|array any jQuery selector, DOM element or set of DOM elements which should be ignored
 			 * @return void
 			 */*@
-        function centerForm(form, animate, ignore)
-        {
-            // If layout is centered
-            if (centered)
-            {
-                var siblings = formWrapper.siblings().not('.closing'),
-                    finalSize = blocHeight+form.data('height');
+            function centerForm(form, animate, ignore) {
+                // If layout is centered
+                if (centered) {
+                    var siblings = formWrapper.siblings().not('.closing'),
+                        finalSize = blocHeight + form.data('height');
 
-                // Ignored elements
-                if (ignore)
-                {
-                    siblings = siblings.not(ignore);
+                    // Ignored elements
+                    if (ignore) {
+                        siblings = siblings.not(ignore);
+                    }
+
+                    // Get other elements height
+                    siblings.each(function (i) {
+                        finalSize += $(this).outerHeight(true);
+                    });
+
+                    // Setup
+                    container[animate ? 'animate' : 'css']({ marginTop: -Math.round(finalSize / 2) + 'px' });
                 }
-
-                // Get other elements height
-                siblings.each(function(i)
-                {
-                    finalSize += $(this).outerHeight(true);
-                });
-
-                // Setup
-                container[animate ? 'animate' : 'css']({ marginTop: -Math.round(finalSize/2)+'px' });
-            }
-        };
+            };
 
 	    @*/**
         * Function to display error messages
         * @param string message the error to display
 	    */*@
-        function displayError(message)
-        {
-            // Show message
-            var message = formWrapper.message(message, {
-                append: false,
-                arrow: 'bottom',
-                classes: ['red-gradient'],
-                animate: false					// We'll do animation later, we need to know the message height first
-            });
+            function displayError(message) {
+                // Show message
+                var message = formWrapper.message(message, {
+                    append: false,
+                    arrow: 'bottom',
+                    classes: ['red-gradient'],
+                    animate: false					// We'll do animation later, we need to know the message height first
+                });
 
-            // Vertical centering (where we need the message height)
-            centerForm(currentForm, true, 'fast');
+                // Vertical centering (where we need the message height)
+                centerForm(currentForm, true, 'fast');
 
-            // Watch for closing and show with effect
-            message.bind('endfade', function(event)
-            {
-                // This will be called once the message has faded away and is removed
-                centerForm(currentForm, true, message.get(0));
+                // Watch for closing and show with effect
+                message.bind('endfade', function (event) {
+                    // This will be called once the message has faded away and is removed
+                    centerForm(currentForm, true, message.get(0));
 
-            }).hide().slideDown('fast');
-        };
+                }).hide().slideDown('fast');
+            };
 
         @*/**
          * Function to display loading messages
          * @param string message the message to display 
          */*@
-        function displayLoading(message)
-        {
-            // Show message
-            var message = formWrapper.message('<strong>'+message+'</strong>', {
-                append: false,
-                arrow: 'bottom',
-                classes: ['blue-gradient', 'align-center'],
-                stripes: true,
-                darkStripes: false,
-                closable: false,
-                animate: false					// We'll do animation later, we need to know the message height first
-            });
+            function displayLoading(message) {
+                // Show message
+                var message = formWrapper.message('<strong>' + message + '</strong>', {
+                    append: false,
+                    arrow: 'bottom',
+                    classes: ['blue-gradient', 'align-center'],
+                    stripes: true,
+                    darkStripes: false,
+                    closable: false,
+                    animate: false					// We'll do animation later, we need to know the message height first
+                });
 
-            // Vertical centering (where we need the message height)
-            centerForm(currentForm, true, 'fast');
+                // Vertical centering (where we need the message height)
+                centerForm(currentForm, true, 'fast');
 
-            // Watch for closing and show with effect
-            message.bind('endfade', function(event)
-            {
-                // This will be called once the message has faded away and is removed
-                centerForm(currentForm, true, message.get(0));
+                // Watch for closing and show with effect
+                message.bind('endfade', function (event) {
+                    // This will be called once the message has faded away and is removed
+                    centerForm(currentForm, true, message.get(0));
 
-            }).hide().slideDown('fast');
-        };
+                }).hide().slideDown('fast');
+            };
         });
 
         //// What about a notification?
