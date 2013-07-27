@@ -1,3 +1,9 @@
 ﻿@{
+    if (!WebSecurity.Initialized)
+    {
+        WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+    }
+}
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
