@@ -11,6 +11,7 @@
     <AssemblyName>SeiRPGManager.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,14 +30,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data.Entity, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.CF, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Entity, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -61,7 +65,6 @@
     <Compile Include="Repositorio\Exceptions\SeiRPGManagerException.cs" />
     <Compile Include="Repositorio\Exceptions\ViolacaoChaveUnicaException.cs" />
     <Compile Include="Repositorio\Exceptions\ViolacaoReferenciaException.cs" />
-    <Compile Include="Repositorio\ExternalUserDAO.cs" />
     <Compile Include="Repositorio\HabilitadorDAO.cs" />
     <Compile Include="Repositorio\Interface\IAgendaDAO.cs" />
     <Compile Include="Repositorio\Interface\IAnotacaoDAO.cs" />
@@ -71,7 +74,6 @@
     <Compile Include="Repositorio\Interface\IEnredoPoolDAO.cs" />
     <Compile Include="Repositorio\Interface\IEquipamentoDAO.cs" />
     <Compile Include="Repositorio\Interface\IEspecializacaoDAO.cs" />
-    <Compile Include="Repositorio\Interface\IExternalUserDAO.cs" />
     <Compile Include="Repositorio\Interface\IHabilitadorDAO.cs" />
     <Compile Include="Repositorio\Interface\IJogadorDAO.cs" />
     <Compile Include="Repositorio\Interface\IMensagemDAO.cs" />

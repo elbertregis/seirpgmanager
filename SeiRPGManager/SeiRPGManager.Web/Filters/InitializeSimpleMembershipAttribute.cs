@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using SeiRPGManager.Web.Models;
 using WebMatrix.WebData;
+using SeiRPGManager.DAL.Repositorio;
 
 namespace SeiRPGManager.Web.Filters
 {
@@ -25,11 +26,11 @@ namespace SeiRPGManager.Web.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<SeiRPGManagerContexto>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new SeiRPGManagerContexto())
                     {
                         if (!context.Database.Exists())
                         {
@@ -38,7 +39,7 @@ namespace SeiRPGManager.Web.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "Users", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "Users", "UserId", "UserName", autoCreateTables: false);
                 }
                 catch (Exception ex)
                 {

@@ -50,7 +50,6 @@
     <Compile Include="Modelo\ClassesBasicas\Entidade.cs" />
     <Compile Include="Modelo\ClassesBasicas\Equipamento.cs" />
     <Compile Include="Modelo\ClassesBasicas\Especializacao.cs" />
-    <Compile Include="Modelo\ClassesBasicas\ExternalUser.cs" />
     <Compile Include="Modelo\ClassesBasicas\Habilitador.cs" />
     <Compile Include="Modelo\ClassesBasicas\Jogador.cs" />
     <Compile Include="Modelo\ClassesBasicas\Mensagem.cs" />
