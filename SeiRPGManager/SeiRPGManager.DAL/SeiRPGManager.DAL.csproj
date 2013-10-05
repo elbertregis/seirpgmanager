@@ -89,7 +89,6 @@
     <Compile Include="Repositorio\Interface\ISeiRPGManagerDAO.cs" />
     <Compile Include="Repositorio\Interface\ISistemaDAO.cs" />
     <Compile Include="Repositorio\Interface\ITalentoDAO.cs" />
-    <Compile Include="Repositorio\Interface\IUserDAO.cs" />
     <Compile Include="Repositorio\JogadorDAO.cs" />
     <Compile Include="Repositorio\MensagemDAO.cs" />
     <Compile Include="Repositorio\NomePoolDAO.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="Repositorio\SeiRPGManagerInicializador.cs" />
     <Compile Include="Repositorio\SistemaDAO.cs" />
     <Compile Include="Repositorio\TalentoDAO.cs" />
-    <Compile Include="Repositorio\UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeiRPGManager.Entidades\SeiRPGManager.Entidades.csproj">

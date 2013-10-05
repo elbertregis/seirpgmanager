@@ -24,28 +24,28 @@ namespace SeiRPGManager.Web.Filters
 
         private class SimpleMembershipInitializer
         {
-            public SimpleMembershipInitializer()
-            {
-                Database.SetInitializer<SeiRPGManagerContexto>(null);
+            //public SimpleMembershipInitializer()
+            //{
+            //    Database.SetInitializer<SeiRPGManagerContexto>(null);
 
-                try
-                {
-                    using (var context = new SeiRPGManagerContexto())
-                    {
-                        if (!context.Database.Exists())
-                        {
-                            // Create the SimpleMembership database without Entity Framework migration schema
-                            ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
-                        }
-                    }
+            //    try
+            //    {
+            //        using (var context = new SeiRPGManagerContexto())
+            //        {
+            //            if (!context.Database.Exists())
+            //            {
+            //                // Create the SimpleMembership database without Entity Framework migration schema
+            //                ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
+            //            }
+            //        }
 
-                    WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "Users", "UserId", "UserName", autoCreateTables: false);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
-                }
-            }
+            //        WebSecurity.InitializeDatabaseConnection("SeiRPGManagerCon", "Users", "UserId", "UserName", autoCreateTables: false);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        throw new InvalidOperationException("The ASP.NET Simple Membership database could not be initialized. For more information, please see http://go.microsoft.com/fwlink/?LinkId=256588", ex);
+            //    }
+            //}
         }
     }
 }

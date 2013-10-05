@@ -134,9 +134,6 @@ namespace SeiRPGManager.DAL.Repositorio
         /// </summary>
         public DbSet<Talento> Talentos { get; set; }
 
-        public DbSet<User> Users { get; set; }
-
-        //public DbSet<ExternalUserDAO> ExternalUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
