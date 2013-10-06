@@ -31,7 +31,7 @@ namespace SeiRPGManager.Web
 
             // Microsoft Windows Live Id
             Dictionary<string, object> microsoftExtraData = new Dictionary<string, object>();
-            microsoftExtraData.Add("Icon", "../Images/WindowsLiveId.jpg");
+            microsoftExtraData.Add("Icon", "../Images/microsoft.png");
             OAuthWebSecurity.RegisterMicrosoftClient(
               clientId: "00000000401012A6",
               clientSecret: "OFsGrczOKMMQ3ZXw8SGbiCRJY06BSMQ0",

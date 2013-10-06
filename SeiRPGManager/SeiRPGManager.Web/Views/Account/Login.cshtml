@@ -91,34 +91,10 @@
 <body>
 
 <section id="loginForm">
-<h2>Use a local account to log in.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Log in Form</legend>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.UserName)
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
-            </li>
-        </ol>
-        <input type="submit" value="Log in" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
-    </p>
 }
 </section>
 
@@ -132,27 +108,26 @@
             <h1 class="login-title-image">SEIRPG Manager</h1>
             <h5>&copy; O SubMundo</h5>
         </hgroup>
-        <section class="social" id="socialLoginForm">
-            <h2>Use another service to log in.</h2>
+@*        <section class="social" id="socialLoginForm">
             @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+        </section>*@
         <div id="form-wrapper">
-
+           
             <div id="form-block" class="scratch-metal">
                 <div id="form-viewport">
 
                     <form method="post" action="" id="form-login" class="input-wrapper blue-gradient glossy" title="Login">
                         <ul class="inputs black-input large">
                             <!-- The autocomplete="off" attributes is the only way to prevent webkit browsers from filling the inputs with yellow -->
-                            <li><span class="icon-user mid-margin-right"></span>
-                                <input type="text" name="login" id="login" value="" class="input-unstyled" placeholder="Login" autocomplete="off"></li>
-                            <li><span class="icon-lock mid-margin-right"></span>
-                                <input type="password" name="pass" id="pass" value="" class="input-unstyled" placeholder="Senha" autocomplete="off"></li>
+                            <li><span class="icon-user mid-margin-right"></span>                                
+                            @Html.TextBoxFor(m => m.UserName, new Dictionary<string, object> { { "placeholder", "Login" }, { "class", "input-unstyled" }, { "name", "login" }, { "id", "login" }, { "autocomplete", "off" }, { "value", "" } })</li>
+                            <li><span class="icon-lock mid-margin-right"></span>                                
+                            @Html.PasswordFor(m => m.Password, new Dictionary<string, object> { { "placeholder", "Senha" }, { "class", "input-unstyled" }, { "name", "pass" }, { "id", "pass" }, { "autocomplete", "off" }, { "value", "" } })</li>
                         </ul>
 
                         <p class="button-height">
-                            <button type="submit" class="button glossy float-right" id="login">Login</button>
-                            <input type="checkbox" name="remind" id="remind" value="1" checked="checked" class="switch tiny mid-margin-right with-tooltip" title="Auto-Login">
+                            <button type="submit" class="button glossy float-right" id="login">Login</button>                                                      
+                            @Html.CheckBoxFor(m => m.RememberMe, new Dictionary<string, object> { { "class", "switch tiny mid-margin-right with-tooltip" }, { "name", "remind" }, { "id", "remind" }, { "title", "Auto-Login" }, { "value", "1" } })
                             <label for="remind">Lembrar</label>
                         </p>
                     </form>
@@ -193,15 +168,14 @@
                                 <input type="password" name="pass" id="pass-register" value="" class="input-unstyled" placeholder="Senha" autocomplete="off"></li>
                         </ul>
 
-                        <button type="submit" class="button glossy full-width" id="send-register">Registrar</button>
-
+                        <button type="submit" class="button glossy full-width" id="send-register">Registrar</button>                      
                     </form>
 
                 </div>
             </div>
 
         </div>
-
+         @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
     </div>
 
     <!-- JavaScript at the bottom for fast page loading -->
