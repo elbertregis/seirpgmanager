@@ -46,6 +46,10 @@
     <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.CF, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data.Entity, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data.Extension, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MySql.Data.Extension.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Web, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -1274,6 +1278,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MySql.Web.Extension\MySql.Web.Extension.csproj">
+      <Project>{e3e3b30a-0dbd-462b-8ca0-9377afa84381}</Project>
+      <Name>MySql.Web.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SeiRPGManager.DAL\SeiRPGManager.DAL.csproj">
       <Project>{e7d7e167-af4c-428c-8d9a-3fe4775f5da5}</Project>
       <Name>SeiRPGManager.DAL</Name>

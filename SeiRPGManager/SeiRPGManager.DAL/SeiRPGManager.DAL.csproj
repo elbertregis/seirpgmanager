@@ -59,6 +59,7 @@
     <Compile Include="Repositorio\ArmaDAO.cs" />
     <Compile Include="Repositorio\CampanhaDAO.cs" />
     <Compile Include="Repositorio\CategoriaDAO.cs" />
+    <Compile Include="Repositorio\DropCreateDatabaseIfModelChangesInitializer.cs" />
     <Compile Include="Repositorio\EnredoPoolDAO.cs" />
     <Compile Include="Repositorio\EquipamentoDAO.cs" />
     <Compile Include="Repositorio\EspecializacaoDAO.cs" />
@@ -105,8 +106,17 @@
     <Compile Include="Repositorio\SeiRPGManagerInicializador.cs" />
     <Compile Include="Repositorio\SistemaDAO.cs" />
     <Compile Include="Repositorio\TalentoDAO.cs" />
+    <Compile Include="Repositorio\UserProperty.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MySql.Data.Extension\MySql.Data.Extension.csproj">
+      <Project>{4e2a1497-bd2c-46e1-80b7-82e2b4eca21b}</Project>
+      <Name>MySql.Data.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MySql.Web.Extension\MySql.Web.Extension.csproj">
+      <Project>{e3e3b30a-0dbd-462b-8ca0-9377afa84381}</Project>
+      <Name>MySql.Web.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SeiRPGManager.Entidades\SeiRPGManager.Entidades.csproj">
       <Project>{c588b0aa-e49b-406a-b07a-794618f00730}</Project>
       <Name>SeiRPGManager.Entidades</Name>

@@ -10,11 +10,13 @@ namespace SeiRPGManager.DAL.Repositorio
     using SeiRPGManager.Entidades.Modelo.ClassesBasicas;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.ModelConfiguration.Conventions;
+    using MySql.Data.MySqlClient;
+    using MySql.Web.Security;
 
     /// <summary>
     /// TODO: Update Header
     /// </summary>
-    public class SeiRPGManagerContexto : DbContext
+    public class SeiRPGManagerContexto : MySqlSecurityDbContext
     {
         /// <summary>
         /// TODO: Update Header
@@ -22,6 +24,12 @@ namespace SeiRPGManager.DAL.Repositorio
         public SeiRPGManagerContexto() : base("name=SeiRPGManagerCon")
         {
             this.Configuration.LazyLoadingEnabled = true;
+        }
+
+        public static SeiRPGManagerContexto CriarContexto()
+        {
+            //this.Configuration.LazyLoadingEnabled = true;
+            return new SeiRPGManagerContexto();
         }
 
         /// <summary>
@@ -133,6 +141,11 @@ namespace SeiRPGManager.DAL.Repositorio
         /// TODO: Update Header
         /// </summary>
         public DbSet<Talento> Talentos { get; set; }
+
+        /// <summary>
+        /// TODO: Update Header
+        /// </summary>
+        public DbSet<UserProperty> UserProperties { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
